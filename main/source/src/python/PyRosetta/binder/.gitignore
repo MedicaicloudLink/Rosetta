@@ -1,0 +1,5 @@
+*.pyc
+
+build
+documentation/.build/
+source/.gitignore

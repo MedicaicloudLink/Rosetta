@@ -1,0 +1,102 @@
+// -*- mode:c++;tab-width:2;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t -*-
+// vi: set ts=2 noet:
+//
+// (c) Copyright Rosetta Commons Member Institutions.
+// (c) This file is part of the Rosetta software suite and is made available under license.
+// (c) The Rosetta software is developed by the contributing members of the Rosetta Commons.
+// (c) For more information, see http://www.rosettacommons.org. Questions about this can be
+// (c) addressed to University of Washington CoMotion, email: license@uw.edu.
+
+/// @file   src/protocols/init/init.TaskOperationCreators.ihh
+/// @brief  Creator #includes for TaskOperations for init
+/// @author Steven Lewis smlewi@gmail.com
+
+// Note:
+//  ALL Task Operation Creators should be by themselves or in their own file to speed compile!
+
+//TaskOperationCreator #includes
+#include <core/pack/task/operation/TaskOperationRegistrator.hh>
+#include <core/pack/task/operation/ResFilterRegistrator.hh>
+#include <core/pack/task/operation/ResFilterCreators.hh>
+#include <core/pack/task/operation/ResFilterFactory.hh>
+#include <core/pack/task/operation/ResLvlTaskOperationFactory.hh>
+#include <protocols/antibody/task_operations/AddCDRProfilesOperationCreator.hh>
+#include <protocols/antibody/task_operations/AddCDRProfileSetsOperationCreator.hh>
+#include <protocols/antibody/task_operations/DisableAntibodyRegionOperationCreator.hh>
+#include <protocols/antibody/task_operations/DisableCDRsOperationCreator.hh>
+#include <protocols/antibody/task_operations/RestrictToCDRsAndNeighborsCreator.hh>
+#include <protocols/dna/RestrictDesignToProteinDNAInterfaceCreator.hh>
+#include <protocols/dna/WatsonCrickRotamerCouplingsCreator.hh>
+
+#include <protocols/enzdes/AddLigandMotifRotamersOperationCreator.hh>
+#include <protocols/enzdes/AddRigidBodyLigandConfsCreator.hh>
+#include <protocols/enzdes/DetectProteinLigandInterfaceOperationCreator.hh>
+#include <protocols/enzdes/ProteinLigandInterfaceUpweighterOperationCreator.hh>
+#include <protocols/enzdes/SetCatalyticResPackBehaviorCreator.hh>
+
+#include <protocols/flxbb/LayerDesignOperationCreator.hh>
+
+#include <protocols/forge/remodel/RemodelRotamerLinksCreator.hh>
+
+#include <protocols/hbnet/ConstrainHBondNetworkCreator.hh>
+
+#include <protocols/matdes/BuildingBlockInterfaceOperationCreator.hh>
+
+#include <protocols/pack_interface/ProteinProteinInterfaceUpweighterTaskOperationCreator.hh>
+
+#include <protocols/denovo_design/task_operations/ConsensusLoopDesignOperationCreator.hh>
+
+
+#include <protocols/legacy_sewing/sampling/LegacyReadRepeatNativeRotamersFileCreator.hh>
+#include <protocols/legacy_sewing/sampling/LegacyReadNativeRotamersFileCreator.hh>
+
+#include <protocols/splice/SampleRotamersFromPDBCreator.hh>
+#include <protocols/splice/FindEndpointsOperationCreator.hh>
+#include <protocols/splice/DesignInterfacesOperationCreator.hh>
+
+#include <protocols/task_operations/ConservativeDesignOperationCreator.hh>
+#include <protocols/task_operations/CrystalContactsOperationCreator.hh>
+#include <protocols/task_operations/DatabaseThreadCreator.hh>
+#include <protocols/task_operations/DesignAroundOperationCreator.hh>
+#include <protocols/task_operations/DsspDesignOperationCreator.hh>
+#include <protocols/task_operations/ImportUnboundRotamersOperationCreator.hh>
+#include <protocols/task_operations/InteractingRotamerExplosionCreator.hh>
+#include <protocols/task_operations/JointSequenceOperationCreator.hh>
+#include <protocols/task_operations/LimitAromaChi2OperationCreator.hh>
+#include <protocols/task_operations/LinkResiduesCreator.hh>
+#include <protocols/task_operations/ModifyAnnealerCreator.hh>
+#include <protocols/task_operations/PreventChainFromRepackingOperationCreator.hh>
+#include <protocols/task_operations/PreventResiduesFromRepackingOperationCreator.hh>
+#include <protocols/task_operations/ProteinCoreResFilterCreator.hh>
+#include <protocols/task_operations/ProteinInterfaceDesignOperationCreator.hh>
+#include <protocols/task_operations/PruneBuriedUnsatsOperationCreator.hh>
+#include <protocols/task_operations/ReadResfileFromDBCreator.hh>
+#include <protocols/task_operations/ResfileCommandOperationCreator.hh>
+#include <protocols/task_operations/ResidueProbDesignOperationCreator.hh>
+#include <protocols/task_operations/RestrictByCalculatorsOperationCreator.hh>
+#include <protocols/task_operations/RestrictChainToRepackingOperationCreator.hh>
+#include <protocols/task_operations/RestrictToAlignedSegmentsCreator.hh>
+#include <protocols/task_operations/RestrictNativeResiduesOperationCreator.hh>
+#include <protocols/task_operations/RestrictNonSurfaceToRepackingOperationCreator.hh>
+#include <protocols/task_operations/RestrictResiduesToRepackingOperationCreator.hh>
+#include <protocols/task_operations/RestrictInterGroupVectorOperationCreator.hh>
+#include <protocols/task_operations/RestrictIdentitiesAtAlignedPositionsCreator.hh>
+#include <protocols/task_operations/RestrictIdentitiesOperationCreator.hh>
+#include <protocols/task_operations/RestrictToCDRH3LoopCreator.hh>
+#include <protocols/simple_task_operations/RestrictToInterfaceCreator.hh>
+#include <protocols/task_operations/RestrictToInterfaceOperationCreator.hh>
+#include <protocols/task_operations/RestrictToInterfaceVectorOperationCreator.hh>
+#include <protocols/simple_task_operations/RestrictToLoopsCreator.hh>
+#include <protocols/simple_task_operations/RestrictToLoopsAndNeighborsCreator.hh>
+#include <protocols/task_operations/RestrictToNeighborhoodOperationCreator.hh>
+#include <protocols/task_operations/RestrictToTerminiOperationCreator.hh>
+#include <protocols/task_operations/RetrieveStoredTaskOperationCreator.hh>
+#include <protocols/task_operations/SeqprofConsensusOperationCreator.hh> //also effectively RestrictConservedLowDdgOperationCreator.hh
+#include <protocols/task_operations/SelectResiduesWithinChainCreator.hh>
+#include <protocols/task_operations/SetIGTypeOperationCreator.hh>
+#include <protocols/task_operations/SelectBySASAOperationCreator.hh>
+#include <protocols/task_operations/SelectByDeltaScoreOperationCreator.hh>
+#include <protocols/task_operations/SelectByDensityFitOperationCreator.hh>
+#include <protocols/task_operations/SequenceMotifTaskOperationCreator.hh>
+#include <protocols/task_operations/ThreadSequenceOperationCreator.hh>
+#include <protocols/task_operations/AlignedThreadOperationCreator.hh>

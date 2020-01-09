@@ -1,0 +1,69 @@
+Interface residues:
+Site 1
+     PHE 39
+     HIS 40
+     PHE 41
+     CYS 42
+     ALA 55
+     HIS 57
+     CYS 58
+     GLY 59
+     ASN 95
+     SER 96
+     LEU 97
+     THR 98
+     ILE 99
+     ASP 102
+     TRP 141
+     GLY 142
+     LEU 143
+     TYR 146
+     ALA 149
+     THR 151
+     PRO 152
+     TRP 172
+     LYS 175
+     MET 180
+     SER 189
+     SER 190
+     CYS 191
+     MET 192
+     GLY 193
+     ASP 194
+     SER 195
+     VAL 213
+     SER 214
+     TRP 215
+     GLY 216
+     SER 217
+     SER 218
+     THR 219
+     CYS 220
+     GLY 226
+     VAL 227
+     sele interface1, resi 39+40+41+42+55+57+58+59+95+96+97+98+99+102+141+142+143+146+149+151+152+172+175+180+189+190+191+192+193+194+195+213+214+215+216+217+218+219+220+226+227+
+Site 2
+     TYR 255
+     ASN 256
+     GLU 257
+     LEU 258
+     ASN 259
+     GLY 260
+     CYS 261
+     THR 262
+     TYR 263
+     GLU 264
+     TYR 265
+     ARG 266
+     PRO 267
+     THR 275
+     PRO 277
+     ASN 278
+     CYS 280
+     VAL 281
+     PHE 284
+     LYS 288
+     GLY 299
+     PRO 300
+     sele interface2, resi 255+256+257+258+259+260+261+262+263+264+265+266+267+275+277+278+280+281+284+288+299+300+
+

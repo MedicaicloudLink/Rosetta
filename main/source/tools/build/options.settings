@@ -1,0 +1,201 @@
+# -*- mode:python;indent-tabs-mode:nil;show-trailing-whitespace:t; -*-
+# (c) Copyright Rosetta Commons Member Institutions.
+# (c) This file is part of the Rosetta software suite and is made available under license.
+# (c) The Rosetta software is developed by the contributing members of the Rosetta Commons.
+# (c) For more information, see http://www.rosettacommons.org. Questions about this can be
+# (c) addressed to University of Washington CoMotion, email: license@uw.edu.
+
+# Supported options
+options = {
+
+    "cxx" : {
+        "gcc"     : [ "4.7","4.8", '4.9', '5.1', '5.2', '5.3', '5.4', '6.1', '6.2', '6.3', "*" ],
+        "icc"     : [ "13.1", "*" ], #PBHACK
+        "msvc"    : [ "7.0", "7.1", "8.0", "8.1", "*" ],
+        "xlc"     : [ "7.0", "8.0", "9.0", "XL", "*" ],
+        "clang"   : [ '3.3', '3.4', '3.5', "3.4-1ubuntu3", "3.5-1ubuntu1", "3.6", "3.7", "3.8", "3.9", "4.0", "4.1", "4.2", "5.0", "5.1", "*" ],
+        "*"       : [ '*' ],
+    },
+
+    "os" : {
+        "linux"   : [ "2.6", "*"],
+        "windows" : [ "2000", "XP", "Vista", "*" ],
+        "macos"   : [ "10.4", "*" ],
+        "cygwin"  : [ "*" ],
+        "*"       : [ "*" ],
+    },
+
+    "arch" : {
+        "x86"     : [ "32", "64", "*" ],
+        # XXX: It's not clear if "amd" is a meaningful category
+        "amd"     : [ "32", "64", "*" ],
+        "ppc"     : [ "32", "64", "*" ],
+        "ppc64"     : [ "64" ],
+        "power4"  : [ "32", "64", "*" ],
+        "*"       : [ "*" ],
+    },
+
+    "mode" : [
+        "debug",
+        "release",
+        "release_native", # Build with -Ofast instead of -O3. Also activates -march=native and -mtune=native so you only want to run this on the computer that compiled it
+        "release_symbols",  # Like release, but with debugging symbols attached
+        "release_debug",    # Debug mode, but with release optimizations
+        "release_debug_no_symbols", # release_debug, with symbols removed
+        "profile",
+        "coverage",
+        "pyrosetta",
+        "pyrosetta_debug",
+        "addsan", # Mode adding special instrumentation to check for (sanitize) address errors
+        "memsan", # Mode adding special instrumentation to check for (sanitize) memory errors
+        "ubsan",  # Mode adding special instrumentation to check for (sanitize) undefined behavior
+
+    ],
+
+    "cat" : [
+        "src",
+        "external",
+        "test",
+        "doc",
+    ],
+
+    # "binary" : [
+    #     "program",              # Executable
+    #     "static",               # Static library (archive)
+    #     "shared"                # Dynamic library (dll)
+    # ],
+
+    "extras" : [
+        #Use c++14. Defines CXX14, CXX14_OR_LATER
+        "cxx14",
+
+        #Use c++17. Defines CXX17, CXX17_OR_LATER, CXX14_OR_LATER
+        "cxx17",
+
+        #Use c++20. Defines CXX20, CXX20_OR_LATER, CXX17_OR_LATER, CXX14_OR_LATER
+        "cxx20",
+
+        # Enable BOINC.  Used by rosetta@home
+        "boinc",
+
+        # Build documentation quickly but without graphs (don't use dot)
+        "fastdocs",
+
+        # Build documentation with a full call graph (takes _forever_)
+        "fulldocs",
+
+        # Enable the (experimental?) graphical GUI
+        "graphics",
+
+        # Enable the use of the Message Passing Interface
+        "mpi",
+
+        # # Enable pre-compiled headers.  Experimental: speeds up build.
+        # "precompile",
+
+        # Enable runtime error checking
+        "runtimecheck",
+
+        # Build so that valgrind can follow the memory use.
+        # Valgrind normally works fine with most executables but not
+        # with static builds, which we are doing.
+        "valgrind",
+
+        # Build using static linking.
+        "static",
+
+        # Add -pg flag for use with gprof.
+        "gprof",
+
+        # Use the GCOV code coverage tool (only for GCC compiler).
+        "gcov",
+
+        # Build with floats rather than doubles.
+        "rosetta_float",
+
+        # Build with Boost libraries.
+        "boost",
+
+        # Enable OpenMP
+        "omp",
+
+        # Link to python interpreter
+        "python",
+
+        #enable mysql database support
+        "mysql",
+
+        #enable postgres database support
+        "postgres",
+
+        # Build with CUDA
+        "cuda",
+
+        # Build with OpenCL
+        "opencl",
+
+        # Build with Math Kernel Library (Intel, Stampede)
+        "mkl",
+
+        # Build boost MPI and serialization dependent code (requires these libraries to be installed in /usr/local/lib)
+
+        # Build boost MPI and serialization dependent code (requires these libraries to be installed in /usr/local/lib)
+        "boost_mpi",
+
+       	# Build using link-time optimization. Include whole program optimization as well
+        "lto",
+
+        # Build with Boost thread library
+        "boost_thread",
+
+        # Enable HDF5 file stores
+        "hdf5",
+
+        # Build with the C++11 thread utilities enabled
+        "cxx11thread",
+
+	# Build with (C++11) serialization
+	"serialization",
+
+	# Build with boost non-intrusive pointers
+	"ptr_boost",
+
+	# Enable APBS integration
+	"apbs",
+
+	# Build for Android ARM
+	"android_arm",
+
+	# Build with ZeroMQ library (also imply  serialization)
+	"zeromq",
+
+	# Build linking prebuilt Tensorflow CPU libraries.
+	# Note that these must be added to the LIBRARY_PATH and LD_LIBRARY_PATH environment variables,
+	# and the user.settings file must import the OS environment.  Alternatively, these libraries
+	# must be installed in /user/local/lib.
+	# Note that there's no check that we're actually linking the CPU library and not the GPU library.
+	"tensorflow",
+
+	# Build linking prebuilt Tensorflow GPU libraries.
+	# Note that these must be added to the LIBRARY_PATH and LD_LIBRARY_PATH environment variables,
+	# and the user.settings file must import the OS environment.  Alternatively, these libraries
+	# must be installed in /user/local/lib.  The GPU libraries have additional dependencies, such as
+	# CUDA and CUDNN.
+	# Note that there's no check that we're actually linking the GPU library and not the CPU library.
+	"tensorflow_gpu",
+    ],
+
+
+    # Log debugging output
+
+    "log" : [
+        "environment",
+        "options",
+        "platform",
+        "projects",
+        "settings",
+        "targets",
+        "toplevel",
+    ],
+
+}

@@ -1,0 +1,110 @@
+# -*- mode:python;indent-tabs-mode:nil;show-trailing-whitespace:t; -*-
+#
+# Project settings for numeric tests.
+# (c) Copyright Rosetta Commons Member Institutions.
+# (c) This file is part of the Rosetta software suite and is made available under license.
+# (c) The Rosetta software is developed by the contributing members of the Rosetta Commons.
+# (c) For more information, see http://www.rosettacommons.org. Questions about this can be
+# (c) addressed to University of Washington CoMotion, email: license@uw.edu.
+
+########### KEEP DIRECTORIES AND FILES IN ALPHABETICAL ORDER ###########
+
+sources = {
+	"" : [
+		"agglomerative_hierarchical_clustering",
+		"angle_functions",
+		"Calculator",
+		"ClusteringTreeNode",
+		"color_util",
+		"conversions",
+		"DiscreteIntervalEncodingTree",
+		"EulerAngles",
+		"HomogeneousTransform",
+		"interpolate",
+		"MathMatrix_serialization",
+		"MathNTensor",
+		"MathNTensor_io",
+		"MultiDimensionalHistogram",
+		"numeric.functions",
+		"PCA",
+		"prob_util",
+		"Quaternion",
+		"random",
+		"sphericalVector",
+		"statistics.functions",
+		"util",
+		"VoxelArray",
+		"VoxelGrid",
+        	"WrapAngles",
+		"xyz.functions",
+		"xyzMatrix",
+		"xyzTransform",
+		"xyzTriple",
+		"xyzVector",
+	],
+	"fourier" : [
+		"fft",
+	],
+	"geometry" : [
+		"BoundingBox",
+		"ring_plane.functions",
+	],
+        "geometry/hashing" : [
+                "MinimalClashHash",
+        ],
+	"histograms" : [
+		"OneDHistogram",
+		"TwoDHistogram",
+	],
+	"interpolation" : [
+		"Histogram",
+		"polycubic_catmull_rom",
+	],
+	"interpolation/spline" : [
+        	"bicubic_interpolation_function",
+		"BicubicSpline",
+		"CubicSpline",
+		"TricubicSpline",
+		"PolycubicSpline",
+	],
+	"kdtree" : [
+		"kdtree",
+	],
+	"kinematic_closure" : [
+		"bridgeObjects",
+		#"DixonResultantTests",
+	],
+	"linear_algebra": [
+		"GeneralizedEigenSolverTests",
+		"minimum_bounding_ellipse",
+	],
+	"random" : [
+		"DistributionSampler",
+		"random.functions",
+		"random_xyz",
+		"reservoir_sample",
+		"WeightedReservoirSampler",
+		"WeightedSampler",
+	],
+
+}
+include_path = [ "#external/cxxtest", "#" ]
+library_path = []
+libraries    = [
+	"basic",
+	"core.1",
+	"core.2",
+	"core.3",
+	"core.4",
+	"core.5",
+	"numeric",
+	"utility",
+	"ObjexxFCL",
+]
+subprojects  = []
+testinputfiles = [
+	"interpolation/Histogram_sample.hist",
+	"kinematic_closure/test_peptide.pdb",
+	"mt19937.u",
+	"sampling.prob",
+]

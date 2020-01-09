@@ -1,0 +1,5 @@
+#if defined(__OSX__) or defined(__APPLE__)
+	#include "platform.mac.hpp.in"
+#else
+    #include "platform.linux.hpp.in"
+#endif

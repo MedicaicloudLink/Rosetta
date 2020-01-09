@@ -1,0 +1,141 @@
+# -*- mode:python;indent-tabs-mode:nil;show-trailing-whitespace:t; -*-
+#
+# SCons build script for sources.
+# (c) Copyright Rosetta Commons Member Institutions.
+# (c) This file is part of the Rosetta software suite and is made available under license.
+# (c) The Rosetta software is developed by the contributing members of the Rosetta Commons.
+# (c) For more information, see http://www.rosettacommons.org. Questions about this can be
+# (c) addressed to University of Washington CoMotion, email: license@uw.edu.
+
+# SCons imports
+Import("build", "project")
+
+# Python imports
+from tools.build.settings import Settings, ProjectSettings, clean_env_for_external
+import os
+
+subscript = build.toplevel + "/external/SConscript.external." + project
+subsettings = build.toplevel + "/external/" + project + ".external.settings"
+
+if os.path.exists( subscript ):
+    build_path = "build/external/%s" % (build.platform)
+    # Specialized SConscript for this project - invoke that instead.
+    SConscript(subscript, exports = ["build", "project"],
+          variant_dir = "./", duplicate = False) # Variant dir already set by calling script
+
+elif os.path.exists( subsettings ):
+  # Load the settings from the Rosetta-like settings file
+  requested = Settings.load(subsettings)
+  use_this = True
+  if 'only_with_extras' in requested:
+    # Use if any of the relevant extras is present
+    use_this = False
+    for extra in requested['only_with_extras']:
+        if extra in build.options.extras:
+            use_this = True
+            break
+  requested = ProjectSettings(project, requested)
+
+  # Add the default settings for source builds.
+  actual = ProjectSettings(project)
+
+  # Subprojects are used to determine dependencies on other projects
+  actual.subprojects = requested.subprojects
+
+  # Sources.  Currently we assume they are all C++.  If this ever changes
+  # we will need to differentiate language types in the .src.settings files.
+  if use_this:
+   for package, modules in list(requested.sources.items()):
+    for module in modules:
+        # CUDA files have extension '.cu'
+        if module.endswith(".cu"):
+            #print "build.options.extras", build.options.extras
+            if "cuda" not in build.options.extras : continue # skip .cu files if the "cuda" extra is not supplied
+            source = module
+        elif '.' not in module:
+            source = module + ".cc"
+        else: # Already has extension, and it's probably not ".cc"
+            source = module
+        if package:
+            actual.sources += [ "%s/%s" % (package, source) ]
+        else:
+            actual.sources += [ "%s" % (source) ]
+  else:
+    actual.sources += [ "dummy.cc" ] # We need to have at least one source file in the library
+
+  # Include paths.  Gives priority to user defined paths.
+  actual.include_path = \
+    requested.include_path + \
+    [ "#external/include" ]
+
+  # Library paths.  Gives priority to user defined paths.
+  actual.library_path = \
+    requested.library_path + \
+    [ "#external/lib" ] + \
+    [ "#build/external/" + build.platform ]
+
+  # Libraries.  Gives priority to user defined libraries.
+  actual.libraries = \
+    requested.libraries + \
+    requested.subprojects
+
+  # The Boost library extensions vary by OS which is a huge nuisance.
+  # XXX: This is a temporary solution: the right answer is a Boost
+  # XXX: build script which does the work of selecting the extension.
+  boost_ext = {
+    "linux" : "-gcc",
+    # "macos" : "",
+    # "windows" : "",
+    }.get(build.options.os, "")
+  if "mingw" in build.options.extras and build.options.os == "windows":
+    boost_ext = "-mgw"
+  pre_boostified = actual.libraries
+  actual.libraries = []
+  for lib in pre_boostified:
+    if lib.startswith("boost_"):
+        lib += boost_ext
+    actual.libraries += [ lib ]
+
+  # Transform the modified settings into SCons Environment variables.
+  # Gives priority to project settings over global settings.
+  env = build.environment.Clone()
+  env.Prepend(**actual.symbols())
+
+  clean_env_for_external(env, requested)
+
+  if "static" not in build.options.extras:
+    env["RPATH"] = [
+      build.toplevel + "/build/external/" + build.platform,
+      env.Literal("\\$$ORIGIN"),
+      env.Literal(os.path.join("\\$$ORIGIN", os.pardir, "lib")),
+  ]
+  # direct SCons to the nvcc tool for CUDA source
+  env.Tool('nvcc', toolpath = ['#tools/build/'])
+
+  target = project
+  if "static" not in build.options.extras:
+    #print "In SConscript.src"
+    #print "actual.sources:"
+    #print actual.sources
+    #print "target"
+    #print target
+
+    lib = env.SharedLibrary(target, actual.sources)
+    # Lacking this, doing a build of '<project>' won't build the library,
+    # because the library is created above the '<project>' directory.
+    Alias(project, lib)
+  else:
+    lib = env.StaticLibrary(target, actual.sources)
+    Alias(project, lib)
+  Default(project)
+
+  # Install the library in an easily accessible location
+  # Install("#lib", target)
+
+  # Setup useful aliases for building subdirectories of project.
+  # This allows a target to be project + package and have SCons build only
+  # that package.
+  # TODO: Allow building of specific source units.
+  for package in map(str, BUILD_TARGETS) :
+    if package.startswith(project):
+        Alias(package, "#build/external/" + build.platform + "/" + package)

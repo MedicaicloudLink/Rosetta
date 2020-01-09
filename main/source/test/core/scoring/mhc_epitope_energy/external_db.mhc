@@ -1,0 +1,3 @@
+method external core/scoring/mhc_epitope_energy/externaldb.sql
+alleles *
+unseen penalize 100

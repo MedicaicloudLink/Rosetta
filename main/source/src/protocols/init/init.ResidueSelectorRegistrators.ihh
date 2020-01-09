@@ -1,0 +1,40 @@
+// -*- mode:c++;tab-width:2;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t -*-
+// vi: set ts=2 noet:
+//
+// (c) Copyright Rosetta Commons Member Institutions.
+// (c) This file is part of the Rosetta software suite and is made available under license.
+// (c) The Rosetta software is developed by the contributing members of the Rosetta Commons.
+// (c) For more information, see http://www.rosettacommons.org. Questions about this can be
+// (c) addressed to University of Washington CoMotion, email: license@uw.edu.
+
+/// @file   src/protocols/init/init.ResidueSelectorRegistrators.ihh
+/// @brief  Declare WidgetRegistrators as static (global) variables in this .cc file
+///         so that at load time, they will be initialized, and the Creator classes
+///         they register will be handed to the appropriate WidgetFactory.
+///         This is for ResidueSelectorRegistrators ONLY.
+/// @author Tom Linsky ( tlinsky at uw dot edu )
+
+namespace protocols {
+using core::select::residue_selector::ResidueSelectorRegistrator;
+
+static ResidueSelectorRegistrator< protocols::antibody::residue_selector::AntibodyRegionSelectorCreator > reg_AntibodyRegionSelectorCreator;
+static ResidueSelectorRegistrator< protocols::antibody::residue_selector::CDRResidueSelectorCreator > reg_CDRResidueSelectorCreator;
+
+static ResidueSelectorRegistrator< protocols::cyclic_peptide::RamaMutationSelectorCreator > reg_RamaMutationSelectorCreator;
+
+static ResidueSelectorRegistrator< protocols::denovo_design::residue_selectors::NamedSegmentSelectorCreator > reg_NamedSegmentSelectorCreator;
+static ResidueSelectorRegistrator< protocols::denovo_design::residue_selectors::PairedSheetResidueSelectorCreator > reg_PairedSheetResidueSelectorCreator;
+
+static ResidueSelectorRegistrator< protocols::fold_from_loops::selectors::ProteinResidueSelectorCreator > reg_ProteinResidueSelectorCreator;
+static ResidueSelectorRegistrator< protocols::fold_from_loops::selectors::CutpointResidueSelectorCreator > reg_CutpointResidueSelectorCreator;
+static ResidueSelectorRegistrator< protocols::fold_from_loops::selectors::ConstraintResidueSelectorCreator > reg_ConstraintResidueSelectorCreator;
+
+static ResidueSelectorRegistrator< protocols::hbnet::UnsatSelectorCreator > reg_UnsatSelectorCreator;
+
+static ResidueSelectorRegistrator< protocols::residue_selectors::HBondSelectorCreator > reg_HBondSelectorCreator;
+static ResidueSelectorRegistrator< protocols::residue_selectors::LigandMetalContactSelectorCreator > reg_LigandMetalContactSelectorCreator;
+static ResidueSelectorRegistrator< protocols::residue_selectors::NativeSelectorCreator > reg_NativeSelectorCreator;
+static ResidueSelectorRegistrator< protocols::residue_selectors::StoredResidueSubsetSelectorCreator > reg_StoredResidueSubsetSelectorCreator;
+static ResidueSelectorRegistrator< protocols::residue_selectors::TaskSelectorCreator > reg_TaskSelectorCreator;
+
+} // namespace protocols

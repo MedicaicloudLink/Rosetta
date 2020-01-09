@@ -1,0 +1,122 @@
+# -*- mode:python;indent-tabs-mode:nil;show-trailing-whitespace:t; -*-
+#
+# Project settings for utility tests.
+# (c) Copyright Rosetta Commons Member Institutions.
+# (c) This file is part of the Rosetta software suite and is made available under license.
+# (c) The Rosetta software is developed by the contributing members of the Rosetta Commons.
+# (c) For more information, see http://www.rosettacommons.org. Questions about this can be
+# (c) addressed to University of Washington CoMotion, email: license@uw.edu.
+
+########### KEEP DIRECTORIES AND FILES IN ALPHABETICAL ORDER ###########
+
+sources = {
+	"" : [
+		"BitSet",
+		"BitVector",
+		"dating",
+		"DenseBoolMap",
+		"heap",
+		"in_place_list",
+		"integer_mapping",
+		"iter_util",
+		"LexicographicalIterator",
+		"minmax",
+		"numbers",
+		"OrderedTuple",
+		"recent_history_queue",
+		"simulate_mpi",
+		"sort.functions",
+		"string_util",
+		'type_traits',
+		#"TopScoreSelector",
+		"UTools",
+		"UTracer",
+		"vector0",
+		"vector1",
+		"vector1.functions",
+		"vector1_bool",
+		"vectorL",
+	],
+	"factory" : [
+		"Factory",
+	],
+	"file" : [
+		"file_sys_util",
+		"PathName",
+		"FileName",
+	],
+	"graph" : [
+		"ring_detection",
+		"ArrayPool",
+		"DisjointSets",
+		"Graph",
+		"LowMemGraph",
+	],
+	"io" : [
+		"izstream",
+		"FileContentsMap",
+		"zipstream",
+	],
+	"json": [
+		"json_utilitiesTests",
+	],
+	"options": [
+		"OptionCollection",
+	],
+	"keys" : [
+		"AutoKey",
+		"ClassKeyMap",
+		"ClassKeyVector",
+		"Key4Tuple",
+		"Key4Vector",
+		"SmallKeyMap",
+		"SmallKeyVector",
+		"UserKey",
+	],
+	"pointer" : [
+		# These tests will need to be rewritten for std::shared_ptr / weak_ptr
+		#"access_ptr",
+		#"owning_ptr",
+		#"owning_ptr_MI",
+		'deep_copy',
+		'make_shared',
+	],
+	"signals" : [
+		"BufferedSignalHub",
+		"PausableSignalHub",
+		"SignalHub",
+		"TokenHub",
+	],
+	"sql_database" : [
+		"DatabaseSessionManagerTests",
+	],
+	"tag" : [
+		"Tag",
+		"XMLSchemaGeneration",
+		"validate_w_xsd",
+	],
+	"thread" : [
+		"ReadWriteMutex",
+	],
+
+}
+
+include_path = [ "#external/cxxtest", "#" ]
+library_path = []
+libraries    = [
+	"utility",
+	"ObjexxFCL",
+	"basic", #for Tracer
+	"core.1",
+	"core.2",
+	"core.3",
+	"core.4",
+	"core.5",
+]
+subprojects  = []
+testinputfiles = [
+    "io/no_final_newline.txt",
+    "io/simple_input_file.txt",
+    "io/zipped_file.txt.gz",
+    "UTracer_test.u",
+]
