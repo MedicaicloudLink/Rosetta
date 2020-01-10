@@ -1,0 +1,5 @@
+-ignore_unrecognized_res
+-linmem_ig 10
+-limit_aroma_chi2
+-mute all
+

@@ -1,0 +1,23 @@
+<ROSETTASCRIPTS>
+This script sets up a SEWING run to append onto the C terminus of an asLov2 j-alpha/PKN HR1B fusion to make photoactivatable Rac1 inhibitors. It sets up a 10,000 cycle run with default simulated annealing metrics; it also specifies that only the C terminus should be built upon, and further specifies that residue 65 of the starting structure should not be overwritten; as required resnums are treated as a continuous block, it is only necessary to specify the [modifiable terminus]-most vital residue.
+	<SCOREFXNS>
+	</SCOREFXNS>
+	<FILTERS>
+	</FILTERS>
+	<MOVERS>
+		<AppendAssemblyMover name="aam" model_file_name="./smotifs_H_5_40_L_1_6_H_5_40.segments"  partner_pdb = "./HR1B_LOV_cage_partner.pdb " hashed="false" minimum_cycles = "10000" maximum_cycles = "11000" modifiable_terminus = "C" required_resnums = "65">
+			<AssemblyScorers>
+				<MotifScorer weight = "1" />
+				<InterModelMotifScorer weight = "10" />
+			</AssemblyScorers>
+			<AssemblyRequirements>
+				<ClashRequirement clash_radius = "4" />	
+				<DsspSpecificLengthRequirement dssp_code ="H" minimum_length = "14"/>
+				<SizeInSegmentsRequirement maximum_size = "5" />
+			</AssemblyRequirements>
+		</AppendAssemblyMover> 
+	</MOVERS>
+	<PROTOCOLS>
+		<Add mover_name="aam" />
+	</PROTOCOLS>
+</ROSETTASCRIPTS>
